@@ -2,48 +2,26 @@ import React, { Component } from 'react';
 import {Switch,Route} from "react-router-dom";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from './components/Navbar';
-import Productlist from './components/Productlist';
-import Details from './components/Details';
-import Cart from './components/Cart';
-import Default from './components/Default';
-import Modal from './components/Modal';
-
-
-
+import QRCode from 'qrcode';
 
 
 class App extends Component {
+   generateQR() {
+    let str = 'eat my meat'
+    QRCode.toCanvas(document.getElementById('canvas'), str, function(error) {
+    if (error) console.error(error)
+    //console.log('success!')
+    })
+    }
+  
   render() {
     return (
-  
-  <React.Fragment>
-     <Navbar></Navbar>
-     <Switch>
-
-      <Route exact path="/" component={Productlist}/>
-      <Route path="/Details" component={Details}/>
-      
-      <Route path="/cart" component={Cart}/>
-      
-      <Route component={Default}/>
-     
-
-
-     </Switch>
-     < Modal />
-     
- 
- 
-
- 
-
-
-
-
-
-  </React.Fragment>
-    
+      <div>
+      <canvas id="canvas" align="center" />
+      <button onClick={this.generateQR}>
+      Generate QR!
+ </button>
+ </div>
 
     );
   }
